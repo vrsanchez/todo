@@ -1,4 +1,4 @@
-package com.todo.todoapi;
+package com.todo.todoapi.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,21 +9,18 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+@WebMvcTest(TodoController.class)
+public class TodoControllerUnitTest {
+    @Autowired
+    private MockMvc mvcInvoker;
 
 
-@WebMvcTest(TodoapiApplication.class)
-public class TodoapiApplicationTests {
+    @Test
+    public void getEmptyTodoList() throws Exception {
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/api/todolist").contentType(MediaType.APPLICATION_JSON);
 
-	@Autowired
-	private MockMvc mvcInvoker;
-
-
-	@Test
-	public void getEmptyTodoList() throws Exception {
-		MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/api/todolist").contentType(MediaType.APPLICATION_JSON);
-
-		mvcInvoker.perform(builder)
-				.andExpect(MockMvcResultMatchers.status().isOk());
-	}
+        mvcInvoker.perform(builder)
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
 
 }
